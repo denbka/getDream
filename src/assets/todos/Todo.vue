@@ -1,28 +1,39 @@
 <template>
     <div class="wrapper">
         <h2>Today</h2>
-        <div class="to  do-item" v-for="item in todoList" :key="item"></div>
-        <button @click="addItem">+</button>
+        <input type="text" placeholder="Новая задача" v-model="newTodo" @keypress.enter="addTodo(newTodo)">
+        <button @click="addTodo(newTodo)">Add</button>
+        <button @click="canselTodo()">Очистить</button>
+        <div v-for="item in todos" :key="item">
+            {{item}}
+        </div>
+        <button @click="clearAll">Удалить все задачи</button>
     </div>
 </template>
 
 <script>
-import Vuex from 'vuex';
 
 export default {
+    data() {
+        return {
+            newTodo: '',
+            todos: []
+        }
+    },
     methods: {
-        addItem() {
-            let item = 'Получить продукты';
-            this.$store.dispath('SAVE_TODO', item);
+        addTodo(todo) {
+            this.todos.push(todo)
+            this.newTodo = ''
+        },
+        canselTodo() {
+            this.newTodo = ''
+        },
+        removeTodo() {
+            this.todos.splice(index, 1)
+        },
+        clearAll() {
+            this.todos = []
         }
-    },
-    computed: {
-        todoList() {
-            return this.$store.getters.TODOS;
-        }
-    },
-    mounted() {
-        this.$store.dispath('GET_TODO');
     }
 }
 </script>

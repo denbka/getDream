@@ -14,7 +14,7 @@ import SignUp from './assets/sign/SignUp.vue'
 import SignIn from './assets/sign/SignIn.vue'
 import Todo from './assets/todos/Todo.vue'
 import Apps from './assets/apps/Apps.vue'
-import {store} from './store'
+// import {store} from './store'
 
 
 Vue.use(VueRouter);
@@ -79,7 +79,7 @@ router.beforeEach((to, from, next) => {
 
 new Vue({
   el: '#app',
-  store,
+//   store,
   router,
   render: h => h(App)
 })
