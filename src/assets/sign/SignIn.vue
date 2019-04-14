@@ -6,6 +6,7 @@
         <input type="password" placeholder="Пароль..." autocomplete="off" v-model="body.password" required>
 
         <button type="submit" @click="login">sign in</button>
+        <router-link :to="'/sign_up'" :key="'/sign_up'">Зарегистрироваться</router-link>
     </form>
 </div>
 </template>
@@ -36,6 +37,8 @@ export default {
             .then(response => {
                 console.log(response.data.message);
                 if (response.data.message == "success") {
+                    localStorage.setItem("user", JSON.stringify(response.data.user))
+                    localStorage.setItem("jwt", response.data.jwt)
                     this.$router.push('/account')
                 }
                 else
@@ -104,6 +107,15 @@ form {
         font-size: 1.3em;
         font-weight: bold;
         text-transform: uppercase;
+    }
+
+    a {
+        color: white;
+        font-size: 0.8em;
+        opacity: .5;
+        text-align: center;
+        padding-top: 15px;
+        cursor: pointer;
     }
 }
 

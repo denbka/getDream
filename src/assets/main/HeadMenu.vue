@@ -6,7 +6,7 @@
         </form>
         <div class="dropdown" :class="state" id="account">
             <div @click="showMenu" class="block">
-                <a class="btn btn-secondary login">{{name}}</a>
+                <a class="btn btn-secondary login">{{showName()}}</a>
                 <a class="btn btn-secondary avatar"></a>
             </div>
             <div class="dropdown-menu">
@@ -21,7 +21,7 @@
   export default {
       data() {
           return {
-              name: 'Денис',
+              name: localStorage.getItem("user"),
               state: 'close'
           }
       },
@@ -39,8 +39,15 @@
               this.$router.push('/settings')
           },
           logout() {
-              this.$router.push('/sign_in')
-          }
+            localStorage.removeItem("user");
+            localStorage.removeItem("jwt");
+            this.$router.push('/sign_in')
+          },
+            showName() {
+                let user = JSON.parse(localStorage.getItem("user"));
+                
+                return user.lastname
+            }
       }
   }
   </script>

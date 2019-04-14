@@ -3,17 +3,17 @@
         <div class="profile">
             <div class="data">
                 <ul>
-                    <li>Денис Рыбачек</li>
-                    <li><mark>Цель:</mark><span>Написать 50 песен</span></li>
-                    <li><mark>Дримов:</mark><span>280</span></li>
-                    <li><mark>Достижений:</mark><span>17</span></li>
+                    <li>{{showFullname()}}</li>
+                    <li><mark>Цель:</mark><span>{{showDream()}}</span></li>
+                    <li><mark>Дримов:</mark><span>{{showCoins()}}</span></li>
+                    <li><mark>Достижений:</mark><span>{{showAchievements()}}</span></li>
                 </ul>
             </div>
             <div class="information">
                 <div class="block">1</div>
                 <div class="progress-bar">
-                    <div class="complete" :style="{width: 51 + '%'}"></div>
-                    <mark>level 1 - 51%</mark>
+                    <div class="complete" :style="{width: 0 + '%'}"></div>
+                    <mark>level 0 - 0%</mark>
                 </div>
             </div>
         </div>
@@ -36,16 +36,21 @@
 export default {
     data() {
         return {
-            information : {
-                achievements: '6'
-            },
-            counter: 45,
-            max: 100
+            user: JSON.parse(localStorage.getItem("user")),
         }
     },
     methods: {
-      width() {
-        
+      showFullname() {
+        return this.user.firstname + ' ' + this.user.lastname;
+      },
+      showCoins() {
+        return this.user.coins
+      },
+      showAchievements() {
+          return this.user.achievements
+      },
+      showDream() {
+          return this.user.dream
       }
     }
 }

@@ -8,6 +8,8 @@
         <input type="password"  name="password" placeholder="Пароль..." autocomplete="off" v-model="postBody.password" required>
 
         <button type="submit" @click="signUp">sign up</button>
+
+        <router-link :to="'/sign_in'" :key="'/sign_in'">Войти в систему</router-link>
     </form>
 </div>
 </template>
@@ -109,6 +111,15 @@ form {
         font-size: 1.3em;
         font-weight: bold;
         text-transform: uppercase;
+    }
+
+    a {
+        color: white;
+        font-size: 0.8em;
+        opacity: .5;
+        text-align: center;
+        padding-top: 15px;
+        cursor: pointer;
     }
 }
 

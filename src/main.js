@@ -31,17 +31,50 @@ Vue.component('applications', Apps);
 
 let router = new VueRouter({
   routes: [
-    { path: '/blog', component: Blog },
-    { path: '/account', component: PersonalArea },
-    { path: '/settings', component: Settings },
-    { path: '/training', component: Training },
-    { path: '/blog/post/:id', name: 'post', component: Note },
-    { path: '/sign_up', name: 'sign_up', component: SignUp },
-    { path: '/sign_in', name: 'sign_in', component: SignIn },
-    { path: '/todo', component: Todo },
-    { path: '/apps', component: Apps}
+    { path: '/blog', meta: {requiresAuth: true}, component: Blog },
+    { path: '/account', meta: {requiresAuth: true}, component: PersonalArea },
+    { path: '/settings', meta: {requiresAuth: true}, component: Settings },
+    { path: '/training', meta: {requiresAuth: true}, component: Training },
+    { path: '/blog/post/:id', name: 'post', meta: {requiresAuth: true}, component: Note },
+    { path: '/sign_up', name: 'sign_up', meta: {guest: true}, component: SignUp },
+    { path: '/sign_in', name: 'sign_in', meta: {guest: true}, component: SignIn },
+    { path: '/todo', meta: {requiresAuth: true}, component: Todo },
+    { path: '/apps', meta: {requiresAuth: true}, component: Apps},
+    { path: '/*', meta: {requiresAuth: true} }
   ],
   mode: 'history'
+})
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (localStorage.getItem('jwt') == null) {
+            next({
+                path: '/sign_in',
+                params: {nextUrl: to.fullPath}
+            })
+        } else {
+            let user = JSON.parse(localStorage.getItem('user'));
+
+            if (to.matched.some(record => record.meta.isAdmin)) {
+                if (user.isAdmin == 1) {
+                    next();
+                } else {
+                    next({path: '/account'});
+                }
+            } else {
+                    next();
+                }
+            }
+        } else if(to.matched.some(record => record.meta.guest)) {
+            if(localStorage.getItem('jwt') == null){
+                next()
+            }
+            else{
+                next({path: '/account'})
+            }
+        }else {
+            next() 
+        }
 })
 
 new Vue({

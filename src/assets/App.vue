@@ -1,8 +1,8 @@
 <template>
     <div id="app">
-        <sidebar v-if="func()"></sidebar>
+        <sidebar v-if="showMenu()"></sidebar>
         <section>
-            <head-menu v-if="func()"></head-menu>
+            <head-menu v-if="showMenu()"></head-menu>
             <router-view></router-view> <!-- Компонент из экземпляра vue router -->
         </section>
     </div>
@@ -11,7 +11,7 @@
 <script>
 export default {
     methods: {
-        func() {
+        showMenu() {
             if (this.$route.name == 'sign_up' || this.$route.name == 'sign_in')
                 return false
                 else
