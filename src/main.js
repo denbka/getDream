@@ -14,7 +14,7 @@ import SignUp from './assets/sign/SignUp.vue'
 import SignIn from './assets/sign/SignIn.vue'
 import Todo from './assets/todos/Todo.vue'
 import Apps from './assets/apps/Apps.vue'
-// import {store} from './store'
+import store from './store'
 
 
 Vue.use(VueRouter);
@@ -45,41 +45,41 @@ let router = new VueRouter({
   mode: 'history'
 })
 
-router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (localStorage.getItem('jwt') == null) {
-            next({
-                path: '/sign_in',
-                params: {nextUrl: to.fullPath}
-            })
-        } else {
-            let user = JSON.parse(localStorage.getItem('user'));
+// router.beforeEach((to, from, next) => {
+//     if (to.matched.some(record => record.meta.requiresAuth)) {
+//         if (localStorage.getItem('jwt') == null) {
+//             next({
+//                 path: '/sign_in',
+//                 params: {nextUrl: to.fullPath}
+//             })
+//         } else {
+//             let user = JSON.parse(localStorage.getItem('user'));
 
-            if (to.matched.some(record => record.meta.isAdmin)) {
-                if (user.isAdmin == 1) {
-                    next();
-                } else {
-                    next({path: '/account'});
-                }
-            } else {
-                    next();
-                }
-            }
-        } else if(to.matched.some(record => record.meta.guest)) {
-            if(localStorage.getItem('jwt') == null){
-                next()
-            }
-            else{
-                next({path: '/account'})
-            }
-        }else {
-            next() 
-        }
-})
+//             if (to.matched.some(record => record.meta.isAdmin)) {
+//                 if (user.isAdmin == 1) {
+//                     next();
+//                 } else {
+//                     next({path: '/account'});
+//                 }
+//             } else {
+//                     next();
+//                 }
+//             }
+//         } else if(to.matched.some(record => record.meta.guest)) {
+//             if(localStorage.getItem('jwt') == null){
+//                 next()
+//             }
+//             else{
+//                 next({path: '/account'})
+//             }
+//         } else {
+//             next() 
+//         }
+// })
 
 new Vue({
-  el: '#app',
-//   store,
-  router,
-  render: h => h(App)
-})
+    el: '#app',
+    store,
+    router,
+    render: h => h(App)
+}) 

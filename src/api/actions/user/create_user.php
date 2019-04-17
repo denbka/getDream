@@ -16,8 +16,6 @@ $db = new Database();
 $database = $db->getConnection();
 $user = new User($database);
 
-
-
 $data = json_decode(file_get_contents("php://input"), true);
 $user->firstname = htmlspecialchars(strip_tags($data['firstname']));
 $user->lastname = htmlspecialchars(strip_tags($data['lastname']));
@@ -26,10 +24,9 @@ $user->email = htmlspecialchars(strip_tags($data['email']));
 $user->password=htmlspecialchars(strip_tags($data['password']));
 $user->password = password_hash($data['password'], PASSWORD_BCRYPT);
 
-$user->create();
-
 if ($user->create())
 {
+    $user->create();
     http_response_code(200);
     echo json_encode(array(
         "message" => "success"

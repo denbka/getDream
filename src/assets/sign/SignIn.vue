@@ -17,8 +17,8 @@ export default {
     data() {
         return {
             body: {
-                email: '',
-                password: ''
+                email: 'deniskindo@mail.ru',
+                password: 'i35270099'
             },
             message: ''
         }
@@ -38,7 +38,6 @@ export default {
                 console.log(response.data.message);
                 if (response.data.message == "success") {
                     localStorage.setItem("user", JSON.stringify(response.data.user))
-                    localStorage.setItem("jwt", response.data.jwt)
                     this.$router.push('/account')
                 }
                 else

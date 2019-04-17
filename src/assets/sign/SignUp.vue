@@ -41,7 +41,7 @@ export default {
             .then(response => {
                 console.log(response.data.message);
                 if (response.data.message == "success")
-                this.$router.push('/account')
+                this.$router.push('/sign_in')
                 else if (response.data.message == "fault")
                 console.log('регистрация не завершена');
             })
