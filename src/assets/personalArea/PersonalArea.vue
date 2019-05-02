@@ -12,8 +12,8 @@
             <div class="information">
                 <div class="block">1</div>
                 <div class="progress-bar">
-                    <div class="complete" :style="{width: 0 + '%'}"></div>
-                    <mark>level 0 - 0%</mark>
+                    <div class="complete" :style="{width: user.coins + '%'}"></div>
+                    <mark>level 0 - {{user.coins}}%</mark>
                 </div>
             </div>
         </div>

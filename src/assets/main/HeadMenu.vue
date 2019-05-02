@@ -2,8 +2,11 @@
     <div class="wrapper">
         <form action="" method="post">
             <i class="fa fa-search"></i>
-            <input type="text" placeholder="search...">
+            <input type="text" placeholder="search..." v-model="search">
         </form>
+        <div class="res">
+            <li v-for="item in todos" :key="item.id"></li>
+        </div>
         <div class="dropdown" :class="state" id="account">
             <div @click="showMenu" class="block">
                 <a class="btn btn-secondary login">{{showName()}}</a>
@@ -18,11 +21,13 @@
 </template>
 
 <script>
+import Axios from 'axios';
   export default {
       data() {
           return {
               name: localStorage.getItem("user"),
-              state: 'close'
+              state: 'close',
+              search: ''
           }
       },
       methods: {
@@ -40,13 +45,21 @@
           },
           logout() {
             localStorage.removeItem("user");
-            localStorage.removeItem("jwt");
             this.$router.push('/sign_in')
           },
             showName() {
                 let user = JSON.parse(localStorage.getItem("user"));
                 
                 return user.lastname
+            },
+            getData() {
+                axios
+                .get('http://myblog/src/api/actions/user/search.php')
+                .then(response => {
+                    console.log(response.data)
+                }, error => {
+
+                })
             }
       }
   }

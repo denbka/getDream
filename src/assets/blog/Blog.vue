@@ -3,7 +3,7 @@
         <div v-for="item in info" :key="item.id" class="item">
             <img :src="item.img" alt="">
             <div>
-                <h3><router-link :to="{ name: 'post', params: {id: item.id} }" :key="item.id">{{item.title}}</router-link></h3>
+                <h3><router-link :to="{ name: 'post', params: {id: item.id-1} }" :key="item.id">{{item.title}}</router-link></h3>
                 <p>{{item.created}}</p>
                 <mark>{{item.author}}</mark>
                 <span>Метки: {{item.mark}}</span>
@@ -80,10 +80,9 @@ font-size: 14px;
         display: flex;
         flex-direction: column;
 
-        h3 {
-            font-size: 1.2em;
-            cursor: pointer;
-            margin: 0;
+        a {
+            color: rgb(65, 65, 65);
+            font-size: 0.8em;
         }
 
         h3:hover {
