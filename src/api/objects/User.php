@@ -53,4 +53,24 @@ class User {
 
         return $stmt;
     }
+
+    public function setCoins()
+    {
+        $query = "UPDATE ".$this->table_name." SET coins = '".$this->coins."' WHERE firstname = '".$this->firstname."'";
+
+        $stmt = $this->connect->prepare($query);
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    public function search()
+    {
+        $query = "SELECT * FROM `users`, `notes`";
+
+        $stmt = $this->connect->prepare($query);
+        $stmt->execute();
+        
+        return $stmt;
+    }
 }

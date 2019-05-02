@@ -3,7 +3,9 @@
         <sidebar v-if="showMenu()"></sidebar>
         <section>
             <head-menu v-if="showMenu()"></head-menu>
-            <router-view></router-view> <!-- Компонент из экземпляра vue router -->
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
         </section>
     </div>
 </template>

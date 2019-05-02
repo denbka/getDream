@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="achievements">
-            <h2>17 достижений</h2>
+            <h2>1 достижение</h2>
             <div class="achi-list">
                 <div class="item">
                     <img src="https://assets.htmlacademy.ru/img/achievements/world/newyear-2019-sheriff-winner.svg" alt="achievement">
